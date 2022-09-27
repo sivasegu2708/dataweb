@@ -1,6 +1,6 @@
 from bottle import default_app, route, get, post, template, request, redirect
 
-import database
+import sql_database as database
 
 @route('/')
 def get_index():
@@ -27,7 +27,7 @@ def get_edit(id):
     items = database.get_items(id)
     if len(items) != 1:
         redirect('/list')
-    item_id, description = items[0]['id'], items[0]['desc']
+    item_id, description = items[0]['id'], items[0]['description']
     assert item_id == int(id)
     return template("edit_item.tpl", id=id, description=description)
 

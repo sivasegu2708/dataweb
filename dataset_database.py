@@ -1,17 +1,16 @@
-# database.py - functions for managing database
+import dataset
 
-import sqlite3
-
-connection = sqlite3.connect("shopping_list.db")
+db = dataset.connect("sqlite:///shopping_list.db")
 
 def get_items(id=None):
-    cursor = connection.cursor()
+    table = db['list']
     if id:
-        items = cursor.execute(f"select id, description from list where id={id}")
+        pass
+        # items = cursor.execute(f"select id, description from list where id={id}")
     else:
-        items = cursor.execute("select id, description from list")
-    items = list(items)
-    items = [ {'id':item[0] ,'desc':item[1]} for item in items ]
+        items = table.find()
+    items = [dict(i) for i in items]
+    print(items)
     return items
 
 def add_item(description):
@@ -29,6 +28,7 @@ def update_item(id, description):
     cursor.execute(f"update list set description='{description}' where id={id}")
     connection.commit()
 
-
+if __name__ == "__main__":
+    get_items()
 
 
