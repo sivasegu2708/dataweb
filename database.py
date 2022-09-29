@@ -11,7 +11,7 @@ def get_items(id=None):
     else:
         items = cursor.execute("select id, description from list")
     items = list(items)
-    items = [ {'id':item[0] ,'desc':item[1]} for item in items ]
+    items = [ {'id':item[0] ,'description':item[1]} for item in items ]
     return items
 
 def add_item(description):
@@ -28,7 +28,4 @@ def update_item(id, description):
     cursor = connection.cursor()
     cursor.execute(f"update list set description='{description}' where id={id}")
     connection.commit()
-
-
-
 

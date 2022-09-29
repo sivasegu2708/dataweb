@@ -29,6 +29,3 @@ def update_item(id, description):
     cursor.execute(f"update list set description='{description}' where id={id}")
     connection.commit()
 
-
-
-
